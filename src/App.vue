@@ -5,7 +5,8 @@ const route = useRoute();
 </script>
 
 <template>
-  <h1 class="w100">1379 地球流浪记</h1>
-  <router-view></router-view>
+  <main class="px-7 py-10 of-x-hidden">
+    <router-view></router-view>
+  </main>
 </template>
 <style scoped lang="less"></style>

@@ -8,6 +8,8 @@ import AutoImport from 'unplugin-auto-import/vite'
 import { VueRouterAutoImports } from 'unplugin-vue-router'
 import VueRouter from 'unplugin-vue-router/vite'
 import matter from 'gray-matter'
+import Markdown from 'unplugin-vue-markdown/vite'
+import MarkdownItShiki from '@shikijs/markdown-it'
 
 
 // https://vitejs.dev/config/
@@ -17,7 +19,9 @@ export default defineConfig({
     host: true,
   },
   plugins: [
-    vue(),
+    vue({
+      include: [/\.vue$/, /\.md$/],
+    }),
     UnoCSS(),
     AutoImport({
       imports: ['vue', VueRouterAutoImports],
@@ -28,8 +32,7 @@ export default defineConfig({
       logs: true,
       extendRoute(route) {
         const path = route.components.get('default')
-        if (!path)
-          return
+        if (!path) return
 
         if (!path.includes('projects.md') && path.endsWith('.md')) {
           const { data } = matter(fs.readFileSync(path, 'utf-8'))
@@ -38,6 +41,25 @@ export default defineConfig({
           })
         }
       },
+    }),
+    Markdown({
+      headEnabled: true,
+      exportFrontmatter: false,
+      exposeFrontmatter: false,
+      exposeExcerpt: false,
+      markdownItOptions: {
+        quotes: '""\'\'',
+      },
+      async markdownItSetup(md) {
+        md.use(await MarkdownItShiki({
+          themes: {
+            dark: 'vitesse-dark',
+            light: 'vitesse-light',
+          },
+          // defaultColor: false,
+          cssVariablePrefix: '--s-', 
+        }))
+      }
     }),
   ],
   resolve: {
