@@ -19,9 +19,6 @@ export default defineConfig({
     host: true,
   },
   plugins: [
-    vue({
-      include: [/\.vue$/, /\.md$/],
-    }),
     UnoCSS(),
     AutoImport({
       imports: ['vue', VueRouterAutoImports],
@@ -41,6 +38,9 @@ export default defineConfig({
           })
         }
       },
+    }),
+    vue({
+      include: [/\.vue$/, /\.md$/],
     }),
     Markdown({
       headEnabled: true,
