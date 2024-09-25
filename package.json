@@ -24,6 +24,7 @@
     "@shikijs/markdown-it": "^1.18.0",
     "@tsconfig/node20": "^20.1.4",
     "@types/node": "^20.14.5",
+    "@types/nprogress": "^0.2.3",
     "@unhead/vue": "^1.11.6",
     "@vitejs/plugin-vue": "^5.0.5",
     "@vue/eslint-config-typescript": "^13.0.0",
