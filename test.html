@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="foo"></div>
+
+  <script type="module">
+    // be sure to specify the exact version
+    import { codeToHtml } from 'https://esm.sh/shiki@1.0.0'
+    // or
+    // import { codeToHtml } from 'https://esm.run/shiki@1.0.0'
+
+    const foo = document.getElementById('foo')
+    foo.innerHTML = await codeToHtml('console.log("Hi, Shiki on CDN :)")', {
+      lang: 'js',
+      theme: 'rose-pine'
+    })
+  </script>
+</body>
+</html>
